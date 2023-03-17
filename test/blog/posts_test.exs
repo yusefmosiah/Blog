@@ -15,6 +15,43 @@ defmodule Blog.PostsTest do
       assert Posts.list_posts() == [post]
     end
 
+    test "list_posts/1 exact matching title title" do
+      post = post_fixture(title: "First Post")
+      assert Posts.list_posts(title: post.title) == [post]
+    end
+
+    test "list_posts/1 partial match beginning of title" do
+      post = post_fixture(title: "First Post")
+      assert Posts.list_posts(title: "First") == [post]
+    end
+
+    test "list_posts/1 partial match end of title" do
+      post = post_fixture(title: "First Post")
+      assert Posts.list_posts(title: "ost") == [post]
+    end
+
+    test "list_posts/1 partial match middle of title" do
+      post = post_fixture(title: "First Post")
+      assert Posts.list_posts(title: "st Po") == [post]
+    end
+
+    test "list_posts/1 partial match case insensitive" do
+      post = post_fixture(title: "First Post")
+      assert Posts.list_posts(title: "fIrSt") == [post]
+    end
+
+    test "list_posts/1 no match" do
+      _post = post_fixture(title: "First Post")
+      assert Posts.list_posts(title: "Second") == []
+    end
+
+    test "list_posts/1 empty string" do
+      post1 = post_fixture(title: "First Post")
+      post2 = post_fixture(title: "Second Post")
+      post3 = post_fixture(title: "Third Post")
+      assert Posts.list_posts(title: "") == [post1, post2, post3]
+    end
+
     test "get_post!/1 returns the post with given id" do
       post = post_fixture()
       assert Posts.get_post!(post.id) == post
@@ -35,7 +72,12 @@ defmodule Blog.PostsTest do
 
     test "update_post/2 with valid data updates the post" do
       post = post_fixture()
-      update_attrs = %{content: "some updated content", subtitle: "some updated subtitle", title: "some updated title"}
+
+      update_attrs = %{
+        content: "some updated content",
+        subtitle: "some updated subtitle",
+        title: "some updated title"
+      }
 
       assert {:ok, %Post{} = post} = Posts.update_post(post, update_attrs)
       assert post.content == "some updated content"
