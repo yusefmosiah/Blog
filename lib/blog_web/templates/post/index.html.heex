@@ -5,7 +5,7 @@
  <.form let={f} for={@conn} method={"get"} action={"/posts"}>
      <div class="flex items-center">
        <%= text_input f, :title, class: "w-full p-2 border border-gray-300 rounded dark:bg-gray-700 dark:border-gray-600 dark:text-gray-100" %>
-        <%= submit "Search", class: "ml-2 bg-blue-600 text-white font-semibold p-2 rounded hover:bg-blue-700" %>
+       <input type="submit" style="display:none">
     </div>
     </.form>
 
