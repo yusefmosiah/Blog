@@ -4,18 +4,15 @@
   <div class="bg-white bg-opacity-40 dark:bg-opacity-50 p-6 rounded-lg shadow-md backdrop-blur-md dark:bg-gray-700">
     <ul class="list-none space-y-2">
       <li>
-        <strong class="text-gray-700 dark:text-gray-400">Title:</strong>
-        <span class="ml-2 text-gray-900 dark:text-gray-200"><%= @post.title %></span>
+        <span class="text-3xl text-bold ml-2 text-gray-900 dark:text-gray-200"><%= @post.title %></span>
       </li>
 
       <li>
-        <strong class="text-gray-700 dark:text-gray-400">Subtitle:</strong>
-        <span class="ml-2 text-gray-900 dark:text-gray-200"><%= @post.subtitle %></span>
+        <span class="text-xl italic font-mono ml-2 text-gray-900 dark:text-gray-200"><%= @post.subtitle %></span>
       </li>
 
       <li>
-        <strong class="text-gray-700 dark:text-gray-400">Content:</strong>
-        <span class="ml-2 text-gray-900 dark:text-gray-200"><%= @post.content %></span>
+        <span class="ml-2 text-gray-900 dark:text-gray-200" phx-raw="{render_code_blocks(@post.content)}"></span>
       </li>
     </ul>
   </div>

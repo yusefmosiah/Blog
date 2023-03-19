@@ -3,6 +3,19 @@
 @import "tailwindcss/utilities";
 
 /* This file is for your main application CSS */
+.code-frame {
+    font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
+    background-color: #f5f5f5;
+    border-radius: 6px;
+    padding: 1rem;
+    white-space: pre-wrap;
+  }
+
+  @layer components {
+    .code-frame {
+      @apply font-mono bg-gray-200 rounded p-4 whitespace-pre-wrap;
+    }
+  }
 
 /* Alerts and form errors used by phx.new */
 .alert {
