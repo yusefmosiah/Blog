@@ -1,5 +1,7 @@
-<h1>New Post</h1>
+<div class="mx-auto px-4 py-6 dark:bg-black">
+    <h1 class="text-4xl font-bold mb-6 text-gray-900 dark:text-gray-100">New Post</h1>
 
-<%= render "form.html", Map.put(assigns, :action, Routes.post_path(@conn, :create)) %>
+    <%= render "form.html", Map.put(assigns, :action, Routes.post_path(@conn, :create)) %>
 
-<span><%= link "Back", to: Routes.post_path(@conn, :index) %></span>
+    <span><%= link "Back", to: Routes.post_path(@conn, :index), class: "inline-block mt-6 bg-gray-600 text-white font-semibold p-4 rounded hover:bg-gray-700" %></span>
+  </div>
