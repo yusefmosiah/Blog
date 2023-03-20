@@ -18,19 +18,19 @@ defmodule Blog.Posts do
 
   """
 
-  def list_posts(filters) do
+  def list_posts(filters \\ []) do
     post_title = "%#{filters[:title]}%"
 
     query =
       from p in Post,
-        where: ilike(p.title, ^post_title)
+        where: ilike(p.title, ^post_title) and p.visible
 
     Repo.all(query)
   end
 
-  def list_posts do
-    Repo.all(Post)
-  end
+  # def list_posts do
+  #   Repo.all(Post)
+  # end
 
   @doc """
   Gets a single post.

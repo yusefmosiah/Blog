@@ -7,7 +7,7 @@ Features:
 
 - [x] Posts
 - [x] Search
-- [ ] Visibility Migration
+- [x] Visibility Migration
 - [ ] Comments
 - [ ] Seeding
 - [ ] Comment Form
