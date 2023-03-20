@@ -20,7 +20,7 @@ Features:
 ### Built with Elixir, Phoenix, and Ecto
 
 ### Contributors:
-Yusef Nathanson, Steve Freeman, and Eddie Lay
+Yusef Nathanson, Steve Freeman
 
 ## Run it
 <br>
