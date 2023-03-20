@@ -28,10 +28,6 @@ defmodule Blog.Posts do
     Repo.all(query)
   end
 
-  # def list_posts do
-  #   Repo.all(Post)
-  # end
-
   @doc """
   Gets a single post.
 
