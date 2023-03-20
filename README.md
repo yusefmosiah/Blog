@@ -5,9 +5,9 @@ Basic blog application.
 
 Features:
 
-- [ ] Posts
-- [ ] Search
-- [ ] Visibility Migration
+- [x] Posts
+- [x] Search
+- [x] Visibility Migration
 - [ ] Comments
 - [ ] Seeding
 - [ ] Comment Form

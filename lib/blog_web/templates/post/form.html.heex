@@ -14,9 +14,15 @@
     </div>
 
     <div>
-      <%= label f, :subtitle, class: "block text-lg text-gray-700 dark:text-gray-400" %>
-      <%= text_input f, :subtitle, class: "font-mono w-full p-2 border border-gray-300 rounded dark:bg-gray-700 dark:border-gray-600 dark:text-gray-100" %>
-      <%= error_tag f, :subtitle %>
+      <%= label f, :published_on, class: "block text-lg text-gray-700 dark:text-gray-400" %>
+      <%= date_input f, :published_on, value: Date.utc_today |> Date.to_string(), class: "font-mono w-full p-2 border border-gray-300 rounded dark:bg-gray-700 dark:border-gray-600 dark:text-gray-100" %>
+      <%= error_tag f, :published_on %>
+    </div>
+
+    <div>
+      <%= label f, :visible, class: "block text-lg text-gray-700 dark:text-gray-400" %>
+      <%= checkbox f, :visible, class: "font-mono resize-none p-2 border border-gray-300 rounded dark:bg-gray-700 dark:border-gray-600 dark:text-gray-100" %>
+      <%= error_tag f, :visible_on %>
     </div>
 
     <div>
