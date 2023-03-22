@@ -8,8 +8,8 @@ Features:
 - [x] Posts
 - [x] Search
 - [x] Visibility Migration
-- [ ] Comments
-- [ ] Seeding
+- [x] Comments
+- [x] Seeding
 - [ ] Comment Form
 - [ ] Authentication
 - [ ] Tags
