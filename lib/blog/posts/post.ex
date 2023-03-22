@@ -7,6 +7,7 @@ defmodule Blog.Posts.Post do
     field :title, :string
     field :published_on, :date
     field :visible, :boolean, default: true
+    has_many :comments, Blog.Comments.Comment
 
     timestamps()
   end
@@ -17,12 +18,11 @@ defmodule Blog.Posts.Post do
     |> cast(attrs, [:title, :content, :published_on, :visible])
     |> validate_required([:title, :content, :published_on])
     |> validate_change(:published_on, fn :published_on, date ->
-      case  Date.compare(date, Date.utc_today()) do
+      case Date.compare(date, Date.utc_today()) do
         :gt -> []
         :eq -> []
         :lt -> [published_on: "can't publish in the past"]
       end
-    end
-      )
+    end)
   end
 end

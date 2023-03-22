@@ -52,7 +52,9 @@ defmodule Blog.MixProject do
       {:tailwind, "~> 0.1", runtime: Mix.env() == :dev},
       {:credo, "~> 1.6", only: [:dev, :test], runtime: false},
       {:dialyxir, "~> 1.0", only: :dev, runtime: false},
-      {:ex_doc, "~> 0.28", only: :dev, runtime: false}
+      {:ex_doc, "~> 0.28", only: :dev, runtime: false},
+      {:faker, "~> 0.17"},
+      {:exmoji, "~> 0.3.0"}
     ]
   end
 
