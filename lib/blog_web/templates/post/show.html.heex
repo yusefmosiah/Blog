@@ -11,6 +11,12 @@
     </ul>
   </div>
 
+  <.form let={f} for={@comment_changeset} action={"/comments"}>
+    <%= text_input f, :content %>
+    <%= submit "Make a Comment" %>
+    <%= hidden_input f, :post_id, value: @post.id %>
+  </.form>
+
   <div class="mt-6 space-y-4">
     <%= for comment <- @post.comments do %>
       <div class="bg-white bg-opacity-40 dark:bg-opacity-50 p-4 rounded-lg shadow-lg dark:border-2 dark:border-double dark:border-gray-700 backdrop-blur-md dark:bg-black transform hover:-translate-y-1 transition-all">

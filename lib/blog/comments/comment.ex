@@ -12,7 +12,7 @@ defmodule Blog.Comments.Comment do
   @doc false
   def changeset(comment, attrs) do
     comment
-    |> cast(attrs, [:content])
+    |> cast(attrs, [:content, :post_id])
     |> validate_required([:content])
   end
 end
