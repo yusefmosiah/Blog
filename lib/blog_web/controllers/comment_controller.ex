@@ -23,7 +23,10 @@ defmodule BlogWeb.CommentController do
         |> redirect(to: Routes.post_path(conn, :show, comment_params["post_id"]))
 
       {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "new.html", changeset: changeset)
+        post = Blog.Posts.get_post!(comment_params["post_id"])
+        conn
+        |> put_view(BlogWeb.PostView)
+        |> render("show.html", comment_changeset: changeset, post: post)
         #redirect(conn, to: Routes.post_path(conn, :show, comment_params["post_id"]))
     end
   end

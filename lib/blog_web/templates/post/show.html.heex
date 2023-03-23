@@ -12,7 +12,13 @@
   </div>
 
   <.form let={f} for={@comment_changeset} action={"/comments"}>
+   <%= if @comment_changeset.action do %>
+    <!-- <div class="alert alert-danger bg-red-500 text-white p-4 rounded mb-4">
+     <p>Oops, something went wrong! Please check the errors below.</p>
+    </div> -->
+  <% end %>
     <%= text_input f, :content %>
+    <%= error_tag f, :content %>
     <%= submit "Make a Comment" %>
     <%= hidden_input f, :post_id, value: @post.id %>
   </.form>
