@@ -2,6 +2,7 @@ defmodule BlogWeb.CommentControllerTest do
   use BlogWeb.ConnCase
 
   import Blog.CommentsFixtures
+  import Blog.PostsFixtures
 
   @create_attrs %{content: "some content"}
   @update_attrs %{content: "some updated content"}
@@ -78,7 +79,8 @@ defmodule BlogWeb.CommentControllerTest do
   end
 
   defp create_comment(_) do
-    comment = comment_fixture()
+    post = post_fixture()
+    comment = comment_fixture(post_id: post.id)
     %{comment: comment}
   end
 end

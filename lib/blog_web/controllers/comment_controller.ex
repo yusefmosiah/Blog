@@ -27,7 +27,6 @@ defmodule BlogWeb.CommentController do
         conn
         |> put_view(BlogWeb.PostView)
         |> render("show.html", comment_changeset: changeset, post: post)
-        #redirect(conn, to: Routes.post_path(conn, :show, comment_params["post_id"]))
     end
   end
 

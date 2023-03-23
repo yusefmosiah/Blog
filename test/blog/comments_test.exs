@@ -7,6 +7,7 @@ defmodule Blog.CommentsTest do
     alias Blog.Comments.Comment
 
     import Blog.CommentsFixtures
+    import Blog.PostsFixtures
 
     @invalid_attrs %{content: nil}
 
@@ -40,7 +41,8 @@ defmodule Blog.CommentsTest do
     end
 
     test "update_comment/2 with invalid data returns error changeset" do
-      comment = comment_fixture()
+      post = post_fixture()
+      comment = comment_fixture(post_id: post.id)
       assert {:error, %Ecto.Changeset{}} = Comments.update_comment(comment, @invalid_attrs)
       assert comment == Comments.get_comment!(comment.id)
     end

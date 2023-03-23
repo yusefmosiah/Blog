@@ -13,6 +13,7 @@ defmodule Blog.PostsFixtures do
       |> Enum.into(%{
         content: "some content",
         title: "some title",
+        comments: [],
         published_on: ~D[2024-02-20]
       })
       |> Blog.Posts.create_post()
