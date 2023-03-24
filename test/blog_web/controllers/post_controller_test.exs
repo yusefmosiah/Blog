@@ -4,7 +4,11 @@ defmodule BlogWeb.PostControllerTest do
   import Blog.PostsFixtures
 
   @create_attrs %{content: "some content", title: "some title", published_on: ~D[2024-02-20]}
-  @update_attrs %{content: "some updated content", title: "some updated title", published_on: ~D[2024-02-21]}
+  @update_attrs %{
+    content: "some updated content",
+    title: "some updated title",
+    published_on: ~D[2024-02-21]
+  }
   @invalid_attrs %{content: nil, title: nil, published_on: nil}
 
   describe "index" do
@@ -29,7 +33,7 @@ defmodule BlogWeb.PostControllerTest do
       assert redirected_to(conn) == Routes.post_path(conn, :show, id)
 
       conn = get(conn, Routes.post_path(conn, :show, id))
-      assert html_response(conn, 200) =~ "Show Post"
+      assert html_response(conn, 200) =~ "Post created successfully"
     end
 
     test "renders errors when data is invalid", %{conn: conn} do
@@ -43,7 +47,7 @@ defmodule BlogWeb.PostControllerTest do
 
     test "renders form for editing chosen post", %{conn: conn, post: post} do
       conn = get(conn, Routes.post_path(conn, :edit, post))
-      assert html_response(conn, 200) =~ "Edit Post"
+      assert html_response(conn, 200) =~ "EDIT POST"
     end
   end
 
