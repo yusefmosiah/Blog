@@ -8,7 +8,7 @@ defmodule Blog.CommentsFixtures do
   Generate a comment.
   """
   def comment_fixture(attrs \\ %{}) do
-    {_, comment} =
+    {:ok, comment} =
       attrs
       |> Enum.into(%{
         content: "some content"
