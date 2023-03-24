@@ -12,15 +12,17 @@
   </div>
 
   <.form let={f} for={@comment_changeset} action={"/comments"}>
-   <%= if @comment_changeset.action do %>
-    <!-- <div class="alert alert-danger bg-red-500 text-white p-4 rounded mb-4">
-     <p>Oops, something went wrong! Please check the errors below.</p>
-    </div> -->
+  <%= if @comment_changeset.action do %>
+    <div class="alert alert-danger bg-red-500 text-white p-4 rounded mb-4">
+      <p>Oops, it seems that you tried to submit a comment, but it appears empty.</p>
+    </div>
   <% end %>
-    <%= text_input f, :content %>
+  <div class="flex items-center mt-10">
+    <%= textarea f, :content, placeholder: "write a comment", class: "autoresize w-full p-2 border border-gray-300 rounded dark:bg-gray-700 dark:border-gray-600 dark:text-gray-100" %>
     <%= error_tag f, :content %>
-    <%= submit "Make a Comment" %>
+    <%= submit "COMMENT", class: "py-4 ml-2 rounded-md bg-none text-blue-500 hover:bg-blue-500 hover:text-white p-1.5 rounded border-double hover:border-blue-200 dark:hover:text-white border-4 border-blue-400 dark:hover:border-blue-200" %>
     <%= hidden_input f, :post_id, value: @post.id %>
+  </div>
   </.form>
 
   <div class="mt-6 space-y-4">
