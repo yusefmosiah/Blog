@@ -20,7 +20,7 @@ Features:
 ### Built with Elixir, Phoenix, Ecto, Tailwind CSS
 
 ### Contributors:
-Yusef Nathanson (@yusefmosiah), Steve Freeman (@loteks)
+[Yusef Nathanson](https://github.com/yusefmosiah), [Steve Freeman](https://github.com/loteks)
 
 ## Run it
 <br>
