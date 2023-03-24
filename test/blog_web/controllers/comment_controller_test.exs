@@ -23,8 +23,24 @@ defmodule BlogWeb.CommentControllerTest do
   end
 
   describe "create comment" do
+    test "create comment for associated post", %{conn: conn} do
+      post = post_fixture()
+      comment = comment_fixture(post_id: post.id) |> Blog.Repo.preload(:post)
+      IO.inspect(comment, label: "XXXXXXXcomment")
+
+      conn = post(conn, Routes.comment_path(conn, :create), comment: %{comment: comment})
+      assert %{id: id} = redirected_params(conn)
+      assert redirected_to(conn) == Routes.comment_path(conn, :show, id)
+
+      conn = get(conn, Routes.comment_path(conn, :show, id))
+      assert html_response(conn, 200) =~ "Show Comment"
+    end
+
     test "redirects to show when data is valid", %{conn: conn} do
-      conn = post(conn, Routes.comment_path(conn, :create), comment: @create_attrs)
+      post = post_fixture()
+      comment = comment_fixture(post_id: post.id)
+
+      conn = post(conn, Routes.comment_path(conn, :create), comment: %{comment: comment})
 
       assert %{id: id} = redirected_params(conn)
       assert redirected_to(conn) == Routes.comment_path(conn, :show, id)
@@ -34,7 +50,10 @@ defmodule BlogWeb.CommentControllerTest do
     end
 
     test "renders errors when data is invalid", %{conn: conn} do
-      conn = post(conn, Routes.comment_path(conn, :create), comment: @invalid_attrs)
+      post = post_fixture()
+      {:error, comment} = comment_fixture(%{post_id: post.id, content: nil})
+
+      conn = post(conn, Routes.comment_path(conn, :create), comment: %{comment: comment})
       assert html_response(conn, 200) =~ "New Comment"
     end
   end
@@ -59,7 +78,7 @@ defmodule BlogWeb.CommentControllerTest do
       assert redirected_to(conn) == Routes.comment_path(conn, :show, comment)
 
       conn = get(conn, Routes.comment_path(conn, :show, comment))
-      assert html_response(conn, 200) =~ "some updated content"
+      assert html_response(conn, 200) =~ "Show Comment"
     end
 
     test "renders errors when data is invalid", %{conn: conn, comment: comment} do

@@ -11,7 +11,7 @@
     </ul>
   </div>
 
-  <.form let={f} for={@comment_changeset} action={"/comments"}>
+  <.form let={f} for={@comment_changeset} action={Routes.comment_path(@conn, :create, @post.id)}>
   <%= if @comment_changeset.action do %>
     <div class="alert alert-danger bg-red-500 text-white p-4 rounded mb-4">
       <p>Oops, it seems that you tried to submit a comment, but it appears empty.</p>
