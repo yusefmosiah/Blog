@@ -10,20 +10,19 @@ Features:
 - [x] Visibility Migration
 - [x] Comments
 - [x] Seeding
-- [ ] Comment Form
+- [x] Comment Form
 - [ ] Authentication
 - [ ] Tags
 - [ ] Blog Content
 - [ ] Project Deployment
 
 
-### Built with Elixir, Phoenix, and Ecto
+### Built with Elixir, Phoenix, Ecto, Tailwind CSS
 
 ### Contributors:
-Yusef Nathanson, Steve Freeman
+Yusef Nathanson (@yusefmosiah), Steve Freeman (@loteks)
 
 ## Run it
-<br>
 <br>
 To start your Phoenix server:
 

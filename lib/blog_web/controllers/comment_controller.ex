@@ -23,6 +23,7 @@ defmodule BlogWeb.CommentController do
 
       {:error, %Ecto.Changeset{} = changeset} ->
         post = Blog.Posts.get_post!(comment_params["post_id"])
+
         conn
         |> put_view(BlogWeb.PostView)
         |> render("show.html", comment_changeset: changeset, post: post)
