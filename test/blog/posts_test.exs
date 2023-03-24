@@ -53,7 +53,7 @@ defmodule Blog.PostsTest do
     end
 
     test "get_post!/1 returns the post with given id" do
-      post = post_fixture()
+      post = post_fixture() |> Repo.preload(:comments)
       assert Posts.get_post!(post.id) == post
     end
 

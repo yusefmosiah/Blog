@@ -12,17 +12,19 @@ defmodule Blog.CommentsTest do
     @invalid_attrs %{content: nil}
 
     test "list_comments/0 returns all comments" do
-      comment = comment_fixture()
+      post = post_fixture()
+      comment = comment_fixture(%{post_id: post.id})
       assert Comments.list_comments() == [comment]
     end
 
     test "get_comment!/1 returns the comment with given id" do
-      comment = comment_fixture()
+      post = post_fixture()
+      comment = comment_fixture(%{post_id: post.id})
       assert Comments.get_comment!(comment.id) == comment
     end
 
     test "create_comment/1 with valid data creates a comment" do
-      valid_attrs = %{content: "some content"}
+      valid_attrs = %{content: "some content", post_id: post_fixture().id}
 
       assert {:ok, %Comment{} = comment} = Comments.create_comment(valid_attrs)
       assert comment.content == "some content"
@@ -33,7 +35,8 @@ defmodule Blog.CommentsTest do
     end
 
     test "update_comment/2 with valid data updates the comment" do
-      comment = comment_fixture()
+      post = post_fixture()
+      comment = comment_fixture(%{post_id: post.id})
       update_attrs = %{content: "some updated content"}
 
       assert {:ok, %Comment{} = comment} = Comments.update_comment(comment, update_attrs)
@@ -48,13 +51,15 @@ defmodule Blog.CommentsTest do
     end
 
     test "delete_comment/1 deletes the comment" do
-      comment = comment_fixture()
+      post = post_fixture()
+      comment = comment_fixture(%{post_id: post.id})
       assert {:ok, %Comment{}} = Comments.delete_comment(comment)
       assert_raise Ecto.NoResultsError, fn -> Comments.get_comment!(comment.id) end
     end
 
     test "change_comment/1 returns a comment changeset" do
-      comment = comment_fixture()
+      post = post_fixture()
+      comment = comment_fixture(%{post_id: post.id})
       assert %Ecto.Changeset{} = Comments.change_comment(comment)
     end
   end

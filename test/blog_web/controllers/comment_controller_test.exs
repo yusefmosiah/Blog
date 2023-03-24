@@ -52,7 +52,10 @@ defmodule BlogWeb.CommentControllerTest do
     setup [:create_comment]
 
     test "redirects when data is valid", %{conn: conn, comment: comment} do
-      conn = put(conn, Routes.comment_path(conn, :update, comment), comment: @update_attrs)
+      post = post_fixture()
+      comment = comment_fixture(post_id: post.id)
+
+      conn = put(conn, Routes.comment_path(conn, :update, comment), comment: %{comment: comment})
       assert redirected_to(conn) == Routes.comment_path(conn, :show, comment)
 
       conn = get(conn, Routes.comment_path(conn, :show, comment))
@@ -78,7 +81,7 @@ defmodule BlogWeb.CommentControllerTest do
     end
   end
 
-  defp create_comment(_) do
+  def create_comment(_) do
     post = post_fixture()
     comment = comment_fixture(post_id: post.id)
     %{comment: comment}
