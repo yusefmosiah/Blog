@@ -53,7 +53,7 @@ defmodule Blog.PostsTest do
     end
 
     test "get_post!/1 returns the post with given id" do
-      post = post_fixture()
+      post = post_fixture() |> Repo.preload(:comments)
       assert Posts.get_post!(post.id) == post
     end
 
@@ -86,7 +86,7 @@ defmodule Blog.PostsTest do
     end
 
     test "update_post/2 with invalid data returns error changeset" do
-      post = post_fixture()
+      post = post_fixture() |> Repo.preload(:comments)
       assert {:error, %Ecto.Changeset{}} = Posts.update_post(post, @invalid_attrs)
       assert post == Posts.get_post!(post.id)
     end
