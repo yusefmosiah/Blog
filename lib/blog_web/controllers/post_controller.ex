@@ -70,13 +70,14 @@ defmodule BlogWeb.PostController do
     |> redirect(to: Routes.post_path(conn, :index))
   end
 
-  def require_user_owns_post(conn, _opts) do
+  def require_user_owns_post(conn, opts) do
+    IO.inspect(opts, label: "OPTS")
     IO.inspect(conn, label: "IN REQUIRE_USER_OWNS_POST: conn")
     post_id = conn.path_params["id"] |> String.to_integer()
     post = Posts.get_post!(post_id)
 
     if post.user_id ==
-         get_in(conn, [Access.key!(:assigns), Access.key!(:current_user), Access.key!(:id)]) do
+         get_in(conn.assigns, [Access.key!(:current_user), Access.key!(:id)]) do
       conn
     else
       conn
