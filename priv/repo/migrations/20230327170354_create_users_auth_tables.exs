@@ -19,7 +19,7 @@ defmodule Blog.Repo.Migrations.CreateUsersAuthTables do
       add :context, :string, null: false
       add :sent_to, :string
       timestamps(updated_at: false)
-    eno
+    end
 
     create index(:users_tokens, [:user_id])
     create unique_index(:users_tokens, [:context, :token])
