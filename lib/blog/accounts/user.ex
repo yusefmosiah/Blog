@@ -3,6 +3,7 @@ defmodule Blog.Accounts.User do
   import Ecto.Changeset
 
   schema "users" do
+    has_many :posts, Blog.Posts.Post
     field :email, :string
     field :password, :string, virtual: true, redact: true
     field :hashed_password, :string, redact: true
