@@ -35,8 +35,10 @@
 
   <div class="flex justify-between items-center mt-6 mb-10">
      <span><%= link "BACK", to: Routes.post_path(@conn, :index), class: "inline-block text-gray-400 border-double border-4 dark:border-gray-400 dark:hover:border-white hover:text-white rounded-lg font-semibold p-4 hover:bg-gray-500" %></span>
+     <%= if @post.user_id == get_in(@conn, [Access.key!(:assigns), Access.key!(:current_user), Access.key!(:id)]) do %>
      <span class="mr-2"><%= link "EDIT", to: Routes.post_path(@conn, :edit, @post), class: "inline-block text-yellow-500 border-double border-4 border-yellow-500 hover:border-white dark:hover:bg-yellow-500 dark:hover:border-white hover:text-white rounded-lg font-semibold p-4 hover:bg-yellow-500" %></span>
      <span><%= link "DELETE", to: Routes.post_path(@conn, :delete, @post), method: :delete, data: [confirm: "Are you sure?"], class: "inline-block text-red-400 border-double border-4 border-red-400 hover:border-white dark:hover:border-white hover:text-white rounded-lg font-semibold p-4 hover:bg-red-500" %></span>
+  <% end %>
   </div>
 </div>
 </div>

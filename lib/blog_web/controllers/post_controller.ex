@@ -6,7 +6,7 @@ defmodule BlogWeb.PostController do
   alias Blog.Comments
   alias Blog.Comments.Comment
 
-  plug :require_user_owns_post when action in [:show, :edit, :update, :delete]
+  plug :require_user_owns_post when action in [:edit, :update, :delete]
 
   def index(conn, %{"title" => title}) do
     posts = Posts.list_posts(title: title)
@@ -75,7 +75,8 @@ defmodule BlogWeb.PostController do
     post_id = conn.path_params["id"] |> String.to_integer()
     post = Posts.get_post!(post_id)
 
-    if post.user_id == conn.assigns.current_user.id do
+    if post.user_id ==
+         get_in(conn, [Access.key!(:assigns), Access.key!(:current_user), Access.key!(:id)]) do
       conn
     else
       conn
