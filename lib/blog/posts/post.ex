@@ -10,6 +10,7 @@ defmodule Blog.Posts.Post do
     field :title, :string
     field :published_on, :date
     field :visible, :boolean, default: true
+    belongs_to :user, Blog.Accounts.User
     has_many :comments, Blog.Comments.Comment
 
     timestamps()
@@ -18,8 +19,9 @@ defmodule Blog.Posts.Post do
   @doc false
   def changeset(post, attrs) do
     post
-    |> cast(attrs, [:title, :content, :published_on, :visible])
+    |> cast(attrs, [:title, :content, :published_on, :visible, :user_id])
     |> validate_required([:title, :content, :published_on])
+    |> validate_required([:user_id], message: "only the author can edit this post")
     |> validate_change(:published_on, fn :published_on, date ->
       case Date.compare(date, Date.utc_today()) do
         :gt -> []
