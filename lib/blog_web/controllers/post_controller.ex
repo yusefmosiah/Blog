@@ -21,16 +21,12 @@ defmodule BlogWeb.PostController do
   end
 
   def new(conn, _params) do
-    tags_with_id = Tags.list_tags() |> Enum.map(fn tag -> {tag.name, tag.id} end)
-
     changeset = Posts.change_post(%Post{})
-    render(conn, "new.html", changeset: changeset, tags_with_id: tags_with_id)
+    render(conn, "new.html", changeset: changeset)
   end
 
   def create(conn, %{"post" => post_params}) do
     IO.inspect(post_params, label: "POST PARAMS: post_params")
-    tags_with_id = Tags.list_tags() |> Enum.map(fn tag -> {tag.name, tag.id} end)
-
     case Posts.create_post(post_params) do
       {:ok, post} ->
         conn
@@ -38,7 +34,7 @@ defmodule BlogWeb.PostController do
         |> redirect(to: Routes.post_path(conn, :show, post))
 
       {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "new.html", changeset: changeset, tags_with_id: tags_with_id)
+        render(conn, "new.html", changeset: changeset)
     end
   end
 
@@ -53,19 +49,16 @@ defmodule BlogWeb.PostController do
   end
 
   def edit(conn, %{"id" => id}) do
-    tags_with_id = Tags.list_tags() |> Enum.map(fn tag -> {tag.name, tag.id} end)
-
     post =
       Posts.get_post!(id)
       |> Blog.Repo.preload([:tags])
       |> IO.inspect(label: "PRELOADED IN EDIT: post")
 
     changeset = Posts.change_post(post)
-    render(conn, "edit.html", post: post, changeset: changeset, tags_with_id: tags_with_id)
+    render(conn, "edit.html", post: post, changeset: changeset)
   end
 
   def update(conn, %{"id" => id, "post" => post_params}) do
-    tags_with_id = Tags.list_tags() |> Enum.map(fn tag -> {tag.name, tag.id} end)
     post = Posts.get_post!(id) |> Blog.Repo.preload([:tags])
 
     case Posts.update_post(post, post_params) do
@@ -75,7 +68,7 @@ defmodule BlogWeb.PostController do
         |> redirect(to: Routes.post_path(conn, :show, post))
 
       {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "edit.html", post: post, changeset: changeset, tags_with_id: tags_with_id)
+        render(conn, "edit.html", post: post, changeset: changeset)
     end
   end
 

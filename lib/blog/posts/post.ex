@@ -21,10 +21,10 @@ defmodule Blog.Posts.Post do
   Returns a changeset for creating or updating a `Post`.
 
   """
-  def changeset(post, attrs) do
+  def changeset(post, attrs, tags \\ []) do
     post
     |> cast(attrs, [:title, :content, :published_on, :visible, :user_id])
-    |> put_assoc(:tags, attrs["tags"] || [])
+    |> put_assoc(:tags, tags)
     |> validate_required([:title, :content, :published_on])
     |> validate_required([:user_id], message: "only the author can edit this post")
     |> validate_change(:published_on, fn :published_on, date ->

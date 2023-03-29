@@ -32,9 +32,9 @@
     </div>
 
     <div>
-        <%!-- <%= label f, :tags, class: "block text-lg text-gray-700 dark:text-gray-400" %> --%>
-        <%= multiple_select f, :tags, @tags_with_id, class: "font-mono w-full p-2 border border-gray-300 rounded dark:bg-gray-700 dark:border-gray-600 dark:text-gray-100" %>
-        <%!-- <%= error_tag f, :tags %> --%>
+        <%= label f, :tags, class: "block text-lg text-gray-700 dark:text-gray-400" %>
+        <%= multiple_select f, :tags, tag_options(), class: "font-mono w-full p-2 border border-gray-300 rounded dark:bg-gray-700 dark:border-gray-600 dark:text-gray-100" %>
+        <%= error_tag f, :tags %>
     </div>
 
    <%= hidden_input f, :user_id, value: get_in(@conn, [Access.key!(:assigns), Access.key!(:current_user), Access.key!(:id)]) %>
