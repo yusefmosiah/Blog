@@ -66,8 +66,11 @@ defmodule Blog.Posts do
 
   """
   def create_post(attrs \\ %{}) do
+    IO.inspect(attrs, label: "AAAAattrs")
+
     %Post{}
     |> Post.changeset(attrs)
+    |> IO.inspect(label: "CCCCchangeset")
     |> Repo.insert()
   end
 

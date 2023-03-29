@@ -1,7 +1,7 @@
 <div class="mx-auto px-4 py-6 dark:bg-black">
     <h1 class="text-4xl font-bold mb-6 text-gray-900 dark:text-gray-100">New Post</h1>
 
-    <%= render "form.html", Map.put(assigns, :action, Routes.post_path(@conn, :create), @tags) %>
+    <%= render "form.html", Map.put(assigns, :action, Routes.post_path(@conn, :create)) %>
 
     <span><%= link "BACK", to: Routes.post_path(@conn, :index), class: "inline-block mt-6 text-gray-500 border-double border-4 border-gray-500 dark:border-gray-400 hover:border-white hover:text-white rounded-lg font-semibold p-4 hover:bg-gray-500" %></span>
   </div>

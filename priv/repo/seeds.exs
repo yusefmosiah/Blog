@@ -10,7 +10,7 @@
 # We recommend using the bang functions (`insert!`, `update!`
 # and so on) as they will fail if something goes wrong.
 alias Blog.Posts.Post
-a
+alias Blog.Posts
 alias Blog.Comments.Comment
 alias Blog.Repo
 
@@ -36,7 +36,7 @@ post_with_comments = %Post{
 Repo.insert!(post_sans_comments)
 Repo.insert!(post_with_comments)
 
-Posts.c
+
 
 # emojis = Exmoji.all() |> Enum.map(&Exmoji.EmojiChar.render/1)
 

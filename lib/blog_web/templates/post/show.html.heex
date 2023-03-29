@@ -25,6 +25,15 @@
   </div>
   </.form>
 
+  <li>
+  <strong>Tags:</strong>
+  <ul>
+    <%= for tag <- @post.tags |> IO.inspect(label: "post.tags") do %>
+      <li><%= link tag.name, to: Routes.tag_path(@conn, :show, tag) %></li>
+    <% end %>
+  </ul>
+</li>
+
   <div class="mt-6 space-y-4">
     <%= for comment <- @post.comments do %>
       <div class="bg-white bg-opacity-40 dark:bg-opacity-50 p-4 rounded-lg shadow-lg dark:border-2 dark:border-double dark:border-gray-700 backdrop-blur-md dark:bg-black transform hover:-translate-y-1 transition-all">
