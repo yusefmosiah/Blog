@@ -5,6 +5,8 @@ defmodule BlogWeb.PostController do
   alias Blog.Posts.Post
   alias Blog.Comments
   alias Blog.Comments.Comment
+  alias Blog.Tags.Tag
+  alias Blog.Tag
 
   plug :require_user_owns_post when action in [:edit, :update, :delete]
 
@@ -19,8 +21,9 @@ defmodule BlogWeb.PostController do
   end
 
   def new(conn, _params) do
+    tags = Tags.list_tags()
     changeset = Posts.change_post(%Post{})
-    render(conn, "new.html", changeset: changeset)
+    render(conn, "new.html", changeset: changeset, tags: tags)
   end
 
   def create(conn, %{"post" => post_params}) do
