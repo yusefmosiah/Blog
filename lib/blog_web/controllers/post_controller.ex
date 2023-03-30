@@ -27,6 +27,7 @@ defmodule BlogWeb.PostController do
 
   def create(conn, %{"post" => post_params}) do
     IO.inspect(post_params, label: "POST PARAMS: post_params")
+
     case Posts.create_post(post_params) do
       {:ok, post} ->
         conn
@@ -54,8 +55,11 @@ defmodule BlogWeb.PostController do
       |> Blog.Repo.preload([:tags])
       |> IO.inspect(label: "PRELOADED IN EDIT: post")
 
+    tag_ids = Enum.map(post.tags, fn tag -> tag.id end)
+
     changeset = Posts.change_post(post)
-    render(conn, "edit.html", post: post, changeset: changeset)
+    |> IO.inspect(label: "EEEECHANGES IN EDIT: changeset")
+    render(conn, "edit.html", post: post, changeset: changeset, tag_ids: tag_ids)
   end
 
   def update(conn, %{"id" => id, "post" => post_params}) do

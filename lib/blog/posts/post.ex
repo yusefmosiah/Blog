@@ -21,7 +21,13 @@ defmodule Blog.Posts.Post do
   Returns a changeset for creating or updating a `Post`.
 
   """
-  def changeset(post, attrs, tags \\ []) do
+  def changeset(post, attrs) do
+    tags =
+      attrs["tags"] ||
+        [] |> Enum.map(fn tag -> String.to_integer(tag) end)
+
+    tags = tags |> Enum.map(&Blog.Tags.get_tag!/1)
+
     post
     |> cast(attrs, [:title, :content, :published_on, :visible, :user_id])
     |> put_assoc(:tags, tags)

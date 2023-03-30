@@ -68,14 +68,8 @@ defmodule Blog.Posts do
   def create_post(attrs \\ %{}) do
     IO.inspect(attrs, label: "AAAAattrs")
 
-    tags =
-      attrs["tags"] ||
-        [] |> Enum.map(fn tag -> String.to_integer(tag) end)
-
-    tags = tags |> Enum.map(&Blog.Tags.get_tag!/1)
-
     %Post{}
-    |> Post.changeset(attrs, tags)
+    |> Post.changeset(attrs)
     |> IO.inspect(label: "CCCCchangeset")
     |> Repo.insert()
   end
