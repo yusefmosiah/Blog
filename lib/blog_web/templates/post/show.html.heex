@@ -28,7 +28,7 @@
   <li>
   <strong>Tags:</strong>
   <ul>
-    <%= for tag <- @post.tags |> IO.inspect(label: "post.tags") do %>
+    <%= for tag <- @post.tags do %>
       <li><%= link tag.name, to: Routes.tag_path(@conn, :show, tag) %></li>
     <% end %>
   </ul>

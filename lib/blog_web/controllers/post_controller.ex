@@ -5,8 +5,6 @@ defmodule BlogWeb.PostController do
   alias Blog.Posts.Post
   alias Blog.Comments
   alias Blog.Comments.Comment
-  alias Blog.Tags.Tag
-  alias Blog.Tags
 
   plug :require_user_owns_post when action in [:edit, :update, :delete]
 
@@ -26,8 +24,6 @@ defmodule BlogWeb.PostController do
   end
 
   def create(conn, %{"post" => post_params}) do
-    IO.inspect(post_params, label: "POST PARAMS: post_params")
-
     case Posts.create_post(post_params) do
       {:ok, post} ->
         conn
@@ -43,7 +39,6 @@ defmodule BlogWeb.PostController do
     post =
       Posts.get_post!(id)
       |> Blog.Repo.preload([:comments, :tags])
-      |> IO.inspect(label: "TAGGED?: post")
 
     comment_changeset = Comments.change_comment(%Comment{})
     render(conn, "show.html", post: post, comment_changeset: comment_changeset)
@@ -53,12 +48,10 @@ defmodule BlogWeb.PostController do
     post =
       Posts.get_post!(id)
       |> Blog.Repo.preload([:tags])
-      |> IO.inspect(label: "PRELOADED IN EDIT: post")
 
     tag_ids = Enum.map(post.tags, fn tag -> tag.id end)
 
     changeset = Posts.change_post(post)
-    |> IO.inspect(label: "EEEECHANGES IN EDIT: changeset")
     render(conn, "edit.html", post: post, changeset: changeset, tag_ids: tag_ids)
   end
 
@@ -85,9 +78,7 @@ defmodule BlogWeb.PostController do
     |> redirect(to: Routes.post_path(conn, :index))
   end
 
-  def require_user_owns_post(conn, opts) do
-    IO.inspect(opts, label: "OPTS")
-    IO.inspect(conn, label: "IN REQUIRE_USER_OWNS_POST: conn")
+  def require_user_owns_post(conn, _opts) do
     post_id = conn.path_params["id"] |> String.to_integer()
     post = Posts.get_post!(post_id)
 
