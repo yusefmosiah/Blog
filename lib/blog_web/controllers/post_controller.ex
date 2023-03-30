@@ -36,19 +36,27 @@ defmodule BlogWeb.PostController do
   end
 
   def show(conn, %{"id" => id}) do
-    post = Posts.get_post!(id) |> Blog.Repo.preload([:comments])
+    post =
+      Posts.get_post!(id)
+      |> Blog.Repo.preload([:comments, :tags])
+
     comment_changeset = Comments.change_comment(%Comment{})
     render(conn, "show.html", post: post, comment_changeset: comment_changeset)
   end
 
   def edit(conn, %{"id" => id}) do
-    post = Posts.get_post!(id)
+    post =
+      Posts.get_post!(id)
+      |> Blog.Repo.preload([:tags])
+
+    tag_ids = Enum.map(post.tags, fn tag -> tag.id end)
+
     changeset = Posts.change_post(post)
-    render(conn, "edit.html", post: post, changeset: changeset)
+    render(conn, "edit.html", post: post, changeset: changeset, tag_ids: tag_ids)
   end
 
   def update(conn, %{"id" => id, "post" => post_params}) do
-    post = Posts.get_post!(id)
+    post = Posts.get_post!(id) |> Blog.Repo.preload([:tags])
 
     case Posts.update_post(post, post_params) do
       {:ok, post} ->
@@ -70,9 +78,7 @@ defmodule BlogWeb.PostController do
     |> redirect(to: Routes.post_path(conn, :index))
   end
 
-  def require_user_owns_post(conn, opts) do
-    IO.inspect(opts, label: "OPTS")
-    IO.inspect(conn, label: "IN REQUIRE_USER_OWNS_POST: conn")
+  def require_user_owns_post(conn, _opts) do
     post_id = conn.path_params["id"] |> String.to_integer()
     post = Posts.get_post!(post_id)
 

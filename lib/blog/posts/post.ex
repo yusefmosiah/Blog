@@ -12,14 +12,25 @@ defmodule Blog.Posts.Post do
     field :visible, :boolean, default: true
     belongs_to :user, Blog.Accounts.User
     has_many :comments, Blog.Comments.Comment
+    many_to_many :tags, Blog.Tags.Tag, join_through: "posts_tags", on_replace: :delete
 
     timestamps()
   end
 
-  @doc false
+  @doc """
+  Returns a changeset for creating or updating a `Post`.
+
+  """
   def changeset(post, attrs) do
+    tags =
+      attrs["tags"] ||
+        [] |> Enum.map(fn tag -> String.to_integer(tag) end)
+
+    tags = tags |> Enum.map(&Blog.Tags.get_tag!/1)
+
     post
     |> cast(attrs, [:title, :content, :published_on, :visible, :user_id])
+    |> put_assoc(:tags, tags)
     |> validate_required([:title, :content, :published_on])
     |> validate_required([:user_id], message: "only the author can edit this post")
     |> validate_change(:published_on, fn :published_on, date ->

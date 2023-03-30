@@ -10,6 +10,7 @@
 # We recommend using the bang functions (`insert!`, `update!`
 # and so on) as they will fail if something goes wrong.
 alias Blog.Posts.Post
+alias Blog.Posts
 alias Blog.Comments.Comment
 alias Blog.Repo
 
@@ -35,63 +36,65 @@ post_with_comments = %Post{
 Repo.insert!(post_sans_comments)
 Repo.insert!(post_with_comments)
 
-emojis = Exmoji.all() |> Enum.map(&Exmoji.EmojiChar.render/1)
 
-random_comment = fn random ->
-  cond do
-    random > 70 -> Faker.Lorem.paragraphs() |> Enum.join("\n\n")
-    random > 50 -> Faker.Lorem.paragraph()
-    random > 30 -> Faker.Lorem.sentences() |> Enum.join(" ")
-    random > 10 -> Faker.Lorem.sentence()
-    true -> emojis |> Enum.shuffle() |> Enum.take(Enum.random(1..20)) |> Enum.join("")
-  end
-end
 
-posts_with_comments =
-  for i <- 0..99 do
-    content =
-      Faker.Lorem.paragraphs()
-      |> Enum.join("\n\n")
+# emojis = Exmoji.all() |> Enum.map(&Exmoji.EmojiChar.render/1)
 
-    emojis =
-      emojis
-      |> Enum.shuffle()
-      |> Enum.take(Enum.random(1..10))
-      |> Enum.join("")
+# random_comment = fn random ->
+#   cond do
+#     random > 70 -> Faker.Lorem.paragraphs() |> Enum.join("\n\n")
+#     random > 50 -> Faker.Lorem.paragraph()
+#     random > 30 -> Faker.Lorem.sentences() |> Enum.join(" ")
+#     random > 10 -> Faker.Lorem.sentence()
+#     true -> emojis |> Enum.shuffle() |> Enum.take(Enum.random(1..20)) |> Enum.join("")
+#   end
+# end
 
-    comments =
-      for _ <- 0..Enum.random(1..40) do
-        1..100 |> Enum.random() |> random_comment.()
-      end
-      |> Enum.map(&%Comment{content: &1})
+# posts_with_comments =
+#   for i <- 0..99 do
+#     content =
+#       Faker.Lorem.paragraphs()
+#       |> Enum.join("\n\n")
 
-    %Post{
-      title: Faker.Lorem.Shakespeare.as_you_like_it(),
-      content: "#{i} " <> content,
-      published_on: Date.utc_today(),
-      visible: true,
-      comments: comments
-    }
-    |> Repo.insert!()
-  end
+#     emojis =
+#       emojis
+#       |> Enum.shuffle()
+#       |> Enum.take(Enum.random(1..10))
+#       |> Enum.join("")
 
-comments =
-  for _ <- 0..Enum.random(1..40) do
-    1..100 |> Enum.random() |> random_comment.()
-  end
-  |> Enum.map(&%{content: &1})
+#     comments =
+#       for _ <- 0..Enum.random(1..40) do
+#         1..100 |> Enum.random() |> random_comment.()
+#       end
+#       |> Enum.map(&%Comment{content: &1})
 
-posts_sans_comments =
-  for i <- 100..200 do
-    content =
-      Faker.Lorem.paragraphs()
-      |> Enum.join("\n\n")
+#     %Post{
+#       title: Faker.Lorem.Shakespeare.as_you_like_it(),
+#       content: "#{i} " <> content,
+#       published_on: Date.utc_today(),
+#       visible: true,
+#       comments: comments
+#     }
+#     |> Repo.insert!()
+#   end
 
-    %Post{
-      title: Faker.Lorem.Shakespeare.as_you_like_it(),
-      content: "#{i} " <> content,
-      published_on: Date.utc_today(),
-      visible: true
-    }
-    |> Repo.insert!()
-  end
+# comments =
+#   for _ <- 0..Enum.random(1..40) do
+#     1..100 |> Enum.random() |> random_comment.()
+#   end
+#   |> Enum.map(&%{content: &1})
+
+# posts_sans_comments =
+#   for i <- 100..200 do
+#     content =
+#       Faker.Lorem.paragraphs()
+#       |> Enum.join("\n\n")
+
+#     %Post{
+#       title: Faker.Lorem.Shakespeare.as_you_like_it(),
+#       content: "#{i} " <> content,
+#       published_on: Date.utc_today(),
+#       visible: true
+#     }
+#     |> Repo.insert!()
+#   end

@@ -22,7 +22,7 @@ defmodule BlogWeb.CommentController do
         |> redirect(to: Routes.post_path(conn, :show, comment_params["post_id"]))
 
       {:error, %Ecto.Changeset{} = changeset} ->
-        post = Blog.Posts.get_post!(comment_params["post_id"])
+        post = Blog.Posts.get_post!(comment_params["post_id"]) |> Blog.Repo.preload([:tags])
 
         conn
         |> put_view(BlogWeb.PostView)
