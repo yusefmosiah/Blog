@@ -11,8 +11,8 @@ Features:
 - [x] Comments
 - [x] Seeding
 - [x] Comment Form
-- [ ] Authentication
-- [ ] Tags
+- [x] Authentication
+- [x] Tags
 - [ ] Blog Content
 - [ ] Project Deployment
 
