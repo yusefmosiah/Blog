@@ -3,8 +3,8 @@
     <div class="flex items-center justify-between h-16">
       <div class="w-full justify-between flex items-center">
         <ul class="list-none space-x-6 flex items-center">
+          <li><%= link "home", to: Routes.page_path(@conn, :index), class: "font-mono text-gray-900 dark:text-gray-100 hover:text-gray-500 dark:hover:text-gray-400" %></li>
           <%= if @current_user do %>
-            <li><%= link "home", to: Routes.page_path(@conn, :index), class: "font-mono text-gray-900 dark:text-gray-100 hover:text-gray-500 dark:hover:text-gray-400" %></li>
             <li class="text-gray-900 dark:text-gray-100 font-extralight"><%= @current_user.email %></li>
             <li><%= link "settings", to: Routes.user_settings_path(@conn, :edit), class: "font-mono text-gray-900 dark:text-gray-100 hover:text-gray-500 dark:hover:text-gray-400" %></li>
             <li><%= link "log out", to: Routes.user_session_path(@conn, :delete), method: :delete, class: "font-mono text-gray-900 dark:text-gray-100 hover:text-gray-500 dark:hover:text-gray-400" %></li>
