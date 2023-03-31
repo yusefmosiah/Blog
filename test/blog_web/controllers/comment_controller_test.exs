@@ -7,6 +7,8 @@ defmodule BlogWeb.CommentControllerTest do
 
   describe "index" do
     test "lists all comments", %{conn: conn} do
+      user = user_fixture()
+      conn = log_in_user(conn, user)
       conn = get(conn, Routes.comment_path(conn, :index))
       assert html_response(conn, 200) =~ "Comments"
     end
@@ -15,6 +17,7 @@ defmodule BlogWeb.CommentControllerTest do
   describe "create comment" do
     test "create comment for associated post", %{conn: conn} do
       user = user_fixture()
+      conn = log_in_user(conn, user)
       post = post_fixture(%{user_id: user.id})
 
       conn =
@@ -31,6 +34,7 @@ defmodule BlogWeb.CommentControllerTest do
 
     test "redirects to show when data is valid", %{conn: conn} do
       user = user_fixture()
+      conn = log_in_user(conn, user)
       post = post_fixture(%{user_id: user.id})
 
       conn =
@@ -47,6 +51,7 @@ defmodule BlogWeb.CommentControllerTest do
 
     test "renders errors when data is invalid", %{conn: conn} do
       user = user_fixture()
+      conn = log_in_user(conn, user)
       post = post_fixture(%{user_id: user.id})
 
       conn =
@@ -61,6 +66,7 @@ defmodule BlogWeb.CommentControllerTest do
   describe "edit comment" do
     test "renders form for editing chosen comment", %{conn: conn} do
       user = user_fixture()
+      conn = log_in_user(conn, user)
       post = post_fixture(%{user_id: user.id})
       comment = comment_fixture(%{post_id: post.id})
       conn = get(conn, Routes.comment_path(conn, :edit, comment))
@@ -71,6 +77,7 @@ defmodule BlogWeb.CommentControllerTest do
   describe "update comment" do
     test "redirects when data is valid", %{conn: conn} do
       user = user_fixture()
+      conn = log_in_user(conn, user)
       post = post_fixture(%{user_id: user.id})
       comment = comment_fixture(%{post_id: post.id})
       conn = put(conn, Routes.comment_path(conn, :update, comment), comment: %{comment: comment})
@@ -82,6 +89,7 @@ defmodule BlogWeb.CommentControllerTest do
 
     test "renders errors when data is invalid", %{conn: conn} do
       user = user_fixture()
+      conn = log_in_user(conn, user)
       post = post_fixture(%{user_id: user.id})
       comment = comment_fixture(%{post_id: post.id})
       conn = put(conn, Routes.comment_path(conn, :update, comment), comment: %{content: nil})
@@ -94,6 +102,7 @@ defmodule BlogWeb.CommentControllerTest do
   describe "delete comment" do
     test "deletes chosen comment", %{conn: conn} do
       user = user_fixture()
+      conn = log_in_user(conn, user)
       post = post_fixture(%{user_id: user.id})
       comment = comment_fixture(%{post_id: post.id})
       conn = delete(conn, Routes.comment_path(conn, :delete, comment))
