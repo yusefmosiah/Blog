@@ -20,7 +20,7 @@
             <h2 class="text-4xl font-semibold text-purple-900 font-mono dark:text-purple-200 "><%= link post.title, to: Routes.post_path(@conn, :show, post) %></h2>
           </div>
           <p class="text-gray-600 dark:text-gray-300 mb-4"><%= post.published_on %></p>
-          <p class="text-gray-600 dark:text-gray-300 mb-4 leading-relaxed"><%= post.content %></p>
+          <p class="text-gray-600 dark:text-gray-300 mb-4 leading-relaxed"><%= post_content_preview(post) %></p>
           <div class="flex justify-end">
           </div>
         </div>
