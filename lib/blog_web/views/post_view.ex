@@ -6,10 +6,11 @@ defmodule BlogWeb.PostView do
   end
 
   def post_content_preview(post) do
-    content = post.content
-    |> String.graphemes()
-    |> Enum.take(200)
-    |> Enum.join()
+    content =
+      post.content
+      |> String.graphemes()
+      |> Enum.take(200)
+      |> Enum.join()
 
     if String.length(content) > 200 do
       content <> "..."

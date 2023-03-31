@@ -14,12 +14,10 @@
 # alias Blog.Comments.Comment
 # alias Blog.Repo
 
-
 # {:ok, tag1} = Blog.Tags.create_tag(%{name: "elixir"})
 # {:ok, tag2} = Blog.Tags.create_tag(%{name: "phoenix"})
 # {:ok, tag3} = Blog.Tags.create_tag(%{name: "ecto"})
 # {:ok, tag4} = Blog.Tags.create_tag(%{name: "tailwind"})
-
 
 # {:ok, user} = Blog.Accounts.register_user(%{
 #   email: "test@test.test",
@@ -52,7 +50,6 @@
 # Repo.insert!(post_with_comments)
 # Posts.create_post(post_sans_comments)
 # Posts.create_post(post_with_comments)
-
 
 # emojis = Exmoji.all() |> Enum.map(&Exmoji.EmojiChar.render/1)
 
