@@ -19,34 +19,41 @@ defmodule BlogWeb.PostControllerTest do
 
   describe "new post" do
     test "renders form", %{conn: conn} do
+      user = user_fixture()
+      conn = log_in_user(conn, user)
       conn = get(conn, Routes.post_path(conn, :new))
-      assert html_response(conn, 302) =~ "You are being"
-      assert html_response(conn, 302) =~ "redirected"
+      assert html_response(conn, 200) =~ "settings"
+      assert html_response(conn, 200) =~ "New Post"
     end
   end
 
   describe "create post" do
     test "redirects to show when data is valid", %{conn: conn} do
+      user = user_fixture()
+      conn = log_in_user(conn, user)
+
       create_attrs = %{
         content: "some content",
         title: "some title",
+        user_id: user.id,
         published_on: ~D[2024-02-20]
       }
 
       conn = post(conn, Routes.post_path(conn, :create), post: create_attrs)
 
-      # assert %{} = redirected_params(conn)
-      # assert redirected_to(conn) == Routes.post_path(conn, :show)
+      assert %{id: id} = redirected_params(conn)
+      assert redirected_to(conn) == Routes.post_path(conn, :show, id)
 
-      # # conn = get(conn, Routes.post_path(conn, :show, id))
-      assert html_response(conn, 302) =~ "You are being"
-      assert html_response(conn, 302) =~ "redirected"
+      conn = get(conn, Routes.post_path(conn, :show, id))
+      assert html_response(conn, 200) =~ "some title"
     end
 
     test "renders errors when data is invalid", %{conn: conn} do
+      user = user_fixture()
+      conn = log_in_user(conn, user)
       conn = post(conn, Routes.post_path(conn, :create), post: @invalid_attrs)
-      assert html_response(conn, 302) =~ "You are being"
-      assert html_response(conn, 302) =~ "redirected"
+      assert html_response(conn, 200) =~ "settings"
+      assert html_response(conn, 200) =~ "New Post"
     end
   end
 

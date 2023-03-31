@@ -20,17 +20,16 @@ defmodule BlogWeb.Router do
   scope "/", BlogWeb do
     pipe_through [:browser, :require_authenticated_user]
 
+    resources "/tags", TagController
+    post "/posts/:id", CommentController, :create
+    resources "/comments", CommentController, except: [:create]
     resources "/posts", PostController, only: [:new, :create, :edit, :update, :delete]
   end
 
   scope "/", BlogWeb do
     pipe_through :browser
 
-
-    resources "/comments", CommentController, except: [:create]
-    post "/posts/:id", CommentController, :create
     resources "/posts", PostController, only: [:index, :show]
-    resources "/tags", TagController
     get "/", PageController, :index
   end
 
