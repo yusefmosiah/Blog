@@ -26,10 +26,11 @@ defmodule BlogWeb.Router do
   scope "/", BlogWeb do
     pipe_through :browser
 
-    resources "/tags", TagController
+
     resources "/comments", CommentController, except: [:create]
     post "/posts/:id", CommentController, :create
     resources "/posts", PostController, only: [:index, :show]
+    resources "/tags", TagController
     get "/", PageController, :index
   end
 
