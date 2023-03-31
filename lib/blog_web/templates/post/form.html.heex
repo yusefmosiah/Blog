@@ -1,46 +1,21 @@
 <.form let={f} for={@changeset} action={@action}>
- <div class="max-w-xl mx-auto px-2 py-6">
-  <%= if @changeset.action do %>
-    <div class="alert alert-danger bg-red-500 text-white p-4 rounded mb-4">
-      <p>Oops, something went wrong! Please check the errors below.</p>
+  <div class="max-w-xl mx-auto px-2 py-6">
+    <%= if @changeset.action do %>
+      <div class="alert alert-danger bg-red-500 text-white p-4 rounded mb-4">
+        <p>Oops, something went wrong! Please check the errors below.</p>
+      </div>
+    <% end %>
+
+    <div class="space-y-4">
+      <div>
+        <%= label f, :name, class: "block text-lg text-gray-700 dark:text-gray-400" %>
+        <%= text_input f, :name, class: "font-mono w-full p-2 border border-gray-300 rounded dark:bg-gray-700 dark:border-gray-600 dark:text-gray-100" %>
+        <%= error_tag f, :name %>
+      </div>
+
+      <div>
+        <%= submit "save", class: "font-mono text-blue-500 hover:bg-blue-500 hover:text-white p-4 rounded-lg border-double border-4 border-blue-400 hover:border-blue-200 dark:text-blue-500 dark:hover:text-white dark:hover:border-white" %>
+      </div>
     </div>
-  <% end %>
-
-  <div class="space-y-4">
-    <div>
-      <%= label f, :title, class: "block text-lg text-gray-700 dark:text-gray-400" %>
-      <%= text_input f, :title, class: "font-mono w-full p-2 border border-gray-300 rounded dark:bg-gray-700 dark:border-gray-600 dark:text-gray-100" %>
-      <%= error_tag f, :title %>
-    </div>
-
-    <div>
-      <%= label f, :published_on, class: "block text-lg text-gray-700 dark:text-gray-400" %>
-      <%= date_input f, :published_on, value: Date.utc_today |> Date.to_string(), class: "font-mono w-full p-2 border border-gray-300 rounded dark:bg-gray-700 dark:border-gray-600 dark:text-gray-100" %>
-      <%= error_tag f, :published_on %>
-    </div>
-
-    <div>
-      <%= label f, :visible, class: "block text-lg text-gray-700 dark:text-gray-400" %>
-      <%= checkbox f, :visible, class: "rounded" %>
-      <%= error_tag f, :visible_on %>
-    </div>
-
-    <div>
-      <%= label f, :content, class: "block text-lg text-gray-700 dark:text-gray-400" %>
-      <%= textarea f, :content, class: "autoresize font-mono w-full p-2 border border-gray-300 rounded dark:bg-gray-700 dark:border-gray-600 dark:text-gray-100" %>
-      <%= error_tag f, :content %>
-    </div>
-
-    <div>
-        <%= label f, :tags, class: "block text-lg text-gray-700 dark:text-gray-400" %>
-        <%= multiple_select f, :tags, tag_options(), selected: assigns[:tag_ids] || [], class: "font-mono w-full p-2 border border-gray-300 rounded dark:bg-gray-700 dark:border-gray-600 dark:text-gray-100" %>
-        <%= error_tag f, :tags %>
-    </div>
-
-   <%= hidden_input f, :user_id, value: get_in(@conn, [Access.key!(:assigns), Access.key!(:current_user), Access.key!(:id)]) %>
-   <%= error_tag f, :user_id %>
-   <%= submit "save", class: "font-mono text-blue-500 hover:bg-blue-500 hover:text-white p-4 rounded-lg border-double border-4 border-blue-400 hover:border-blue-200 dark:text-blue-500 dark:hover:text-white dark:hover:border-white" %>
-
-  </div>
   </div>
 </.form>
