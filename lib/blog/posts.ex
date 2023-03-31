@@ -71,8 +71,6 @@ defmodule Blog.Posts do
     |> Repo.insert()
   end
 
-
-
   @doc """
   Updates a post.
 

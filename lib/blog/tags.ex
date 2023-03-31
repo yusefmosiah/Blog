@@ -37,8 +37,6 @@ defmodule Blog.Tags do
   """
   def get_tag!(id), do: Repo.get!(Tag, id)
 
-
-
   @doc """
   Creates a tag.
 
