@@ -11,6 +11,10 @@ defmodule BlogWeb.PostView do
     |> Enum.take(200)
     |> Enum.join()
 
-    content <> "..."
+    if String.length(content) > 200 do
+      content <> "..."
+    else
+      content
+    end
   end
 end
