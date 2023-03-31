@@ -1,15 +1,20 @@
 <div class="container mx-auto max-w-screen-xl px-4">
-<div class="mx-auto px-4 py-6 dark:bg-black">
-  <h1 class="text-6xl font-bold leading-tight mb-6 text-gray-900 dark:text-gray-100"><%= @post.title %></h1>
+<div class="mx-auto px-2 py-6 dark:bg-black">
+  <h1 class="text-5xl font-bold leading-tight mb-6 text-gray-900 dark:text-gray-100 font-mono"><%= @post.title %></h1>
 
   <div class="text-lg bg-white bg-opacity-40 dark:bg-opacity-50 p-6 rounded-lg shadow-md backdrop-blur-md dark:bg-black">
-    <ul class="list-none space-y-2">
-
-      <li>
-        <span class="ml-2 text-gray-900 dark:text-gray-200 leading-relaxed"><%= @post.content %></span>
-      </li>
-    </ul>
+    <p class="space-y-2">
+      <span class="ml-2 text-gray-900 dark:text-gray-300 leading-relaxed"><%= @post.content %></span>
+    </p>
   </div>
+
+
+<h4 class="mt-7 font-extralight">
+    <%= for tag <- @post.tags do %>
+      <%= link "#" <> tag.name, to: Routes.tag_path(@conn, :show, tag) %>
+    <% end %>
+  </h4>
+
 
   <.form let={f} for={@comment_changeset} action={Routes.comment_path(@conn, :create, @post.id)}>
   <%= if @comment_changeset.action do %>
@@ -20,33 +25,26 @@
   <div class="flex items-center mt-10">
     <%= textarea f, :content, placeholder: "write a comment", class: "autoresize w-full p-2 border border-gray-300 rounded dark:bg-gray-700 dark:border-gray-600 dark:text-gray-100" %>
     <%= error_tag f, :content %>
-    <%= submit "COMMENT", class: "py-4 ml-2 rounded-md bg-none text-blue-500 hover:bg-blue-500 hover:text-white p-1.5 rounded border-double hover:border-blue-200 dark:hover:text-white border-4 border-blue-400 dark:hover:border-blue-200" %>
+    <%= submit "comment", class: "font-mono py-4 ml-2 rounded-md bg-none text-blue-500 hover:bg-blue-500 hover:text-white p-1.5 rounded border-double hover:border-blue-200 dark:hover:text-white border-4 border-blue-400 dark:hover:border-blue-200" %>
     <%= hidden_input f, :post_id, value: @post.id %>
   </div>
   </.form>
 
-  <li>
-  <strong>Tags:</strong>
-  <ul>
-    <%= for tag <- @post.tags do %>
-      <li><%= link tag.name, to: Routes.tag_path(@conn, :show, tag) %></li>
-    <% end %>
-  </ul>
-</li>
+
 
   <div class="mt-6 space-y-4">
     <%= for comment <- @post.comments do %>
       <div class="bg-white bg-opacity-40 dark:bg-opacity-50 p-4 rounded-lg shadow-lg dark:border-2 dark:border-double dark:border-gray-700 backdrop-blur-md dark:bg-black transform hover:-translate-y-1 transition-all">
-        <span class="text-gray-900 dark:text-gray-200"><%= comment.content %></span>
+        <span class="text-gray-900 dark:text-gray-300"><%= comment.content %></span>
       </div>
     <% end %>
   </div>
 
   <div class="flex justify-between items-center mt-6 mb-10">
-     <span><%= link "BACK", to: Routes.post_path(@conn, :index), class: "inline-block text-gray-400 border-double border-4 dark:border-gray-400 dark:hover:border-white hover:text-white rounded-lg font-semibold p-4 hover:bg-gray-500" %></span>
+     <span><%= link "back", to: Routes.post_path(@conn, :index), class: "font-mono inline-block text-gray-500 border-double border-4 border-gray-500 dark:border-gray-400 hover:border-white hover:text-white rounded-lg p-4 hover:bg-gray-500" %></span>
      <%= if @post.user_id == get_in(@conn, [Access.key!(:assigns), Access.key!(:current_user), Access.key!(:id)]) do %>
-     <span class="mr-2"><%= link "EDIT", to: Routes.post_path(@conn, :edit, @post), class: "inline-block text-yellow-500 border-double border-4 border-yellow-500 hover:border-white dark:hover:bg-yellow-500 dark:hover:border-white hover:text-white rounded-lg font-semibold p-4 hover:bg-yellow-500" %></span>
-     <span><%= link "DELETE", to: Routes.post_path(@conn, :delete, @post), method: :delete, data: [confirm: "Are you sure?"], class: "inline-block text-red-400 border-double border-4 border-red-400 hover:border-white dark:hover:border-white hover:text-white rounded-lg font-semibold p-4 hover:bg-red-500" %></span>
+     <span><%= link "edit", to: Routes.post_path(@conn, :edit, @post), class: "font-mono inline-block text-yellow-500 border-double border-4 border-yellow-500 hover:border-white dark:hover:bg-yellow-500 dark:hover:border-white hover:text-white rounded-lg p-4 hover:bg-yellow-500" %></span>
+     <span><%= link "delete", to: Routes.post_path(@conn, :delete, @post), method: :delete, data: [confirm: "Are you sure?"], class: "font-mono inline-block text-red-400 border-double border-4 border-red-400 hover:border-white dark:hover:border-white hover:text-white rounded-lg p-4 hover:bg-red-500" %></span>
   <% end %>
   </div>
 </div>

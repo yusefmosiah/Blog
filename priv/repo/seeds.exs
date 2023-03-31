@@ -14,16 +14,31 @@ alias Blog.Posts
 alias Blog.Comments.Comment
 alias Blog.Repo
 
+
+{:ok, tag1} = Blog.Tags.create_tag(%{name: "elixir"})
+{:ok, tag2} = Blog.Tags.create_tag(%{name: "phoenix"})
+{:ok, tag3} = Blog.Tags.create_tag(%{name: "ecto"})
+{:ok, tag4} = Blog.Tags.create_tag(%{name: "tailwind"})
+
+
+{:ok, user} = Blog.Accounts.register_user(%{
+  email: "test@test.test",
+  password: "password1234567",
+})
 post_sans_comments = %Post{
+  user_id: user.id,
   title: "My first post",
   content: "Hello world!",
+  tags: [tag1.id, tag2.id],
   published_on: Date.utc_today(),
   visible: true
 }
 
 post_with_comments = %Post{
+  user_id: user.id,
   title: "My second post",
   content: "content of post 2",
+  tags: [tag3.id, tag4.id],
   published_on: Date.utc_today(),
   visible: true,
   comments: [
@@ -33,9 +48,10 @@ post_with_comments = %Post{
   ]
 }
 
-Repo.insert!(post_sans_comments)
-Repo.insert!(post_with_comments)
-
+# Repo.insert!(post_sans_comments)
+# Repo.insert!(post_with_comments)
+Posts.create_post(post_sans_comments)
+Posts.create_post(post_with_comments)
 
 
 # emojis = Exmoji.all() |> Enum.map(&Exmoji.EmojiChar.render/1)

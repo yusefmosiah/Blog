@@ -48,7 +48,7 @@ defmodule Blog.Posts do
   def get_post!(id) do
     query =
       from p in Post,
-        preload: [:comments]
+        preload: [:comments, :tags]
 
     Repo.get!(query, id)
   end
@@ -70,6 +70,8 @@ defmodule Blog.Posts do
     |> Post.changeset(attrs)
     |> Repo.insert()
   end
+
+
 
   @doc """
   Updates a post.

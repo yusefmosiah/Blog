@@ -13,7 +13,7 @@ defmodule BlogWeb.PostControllerTest do
   describe "index" do
     test "lists all posts", %{conn: conn} do
       conn = get(conn, Routes.post_path(conn, :index))
-      assert html_response(conn, 200) =~ "POSTS"
+      assert html_response(conn, 200) =~ "Posts"
     end
   end
 
@@ -56,7 +56,7 @@ defmodule BlogWeb.PostControllerTest do
       conn = log_in_user(conn, user)
       post = post_fixture(%{user_id: user.id})
       conn = get(conn, Routes.post_path(conn, :edit, post))
-      assert html_response(conn, 200) =~ "EDIT POST"
+      assert html_response(conn, 200) =~ "Edit Post"
     end
   end
 
@@ -77,7 +77,7 @@ defmodule BlogWeb.PostControllerTest do
       conn = log_in_user(conn, user)
       post = post_fixture(%{user_id: user.id})
       conn = put(conn, Routes.post_path(conn, :update, post), post: @invalid_attrs)
-      assert html_response(conn, 200) =~ "EDIT POST"
+      assert html_response(conn, 200) =~ "Edit Post"
     end
   end
 

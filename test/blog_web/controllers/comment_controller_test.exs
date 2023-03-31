@@ -8,7 +8,7 @@ defmodule BlogWeb.CommentControllerTest do
   describe "index" do
     test "lists all comments", %{conn: conn} do
       conn = get(conn, Routes.comment_path(conn, :index))
-      assert html_response(conn, 200) =~ "Listing Comments"
+      assert html_response(conn, 200) =~ "Comments"
     end
   end
 

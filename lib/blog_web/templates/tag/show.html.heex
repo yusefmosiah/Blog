@@ -1,13 +1,19 @@
-<h1>Show Tag</h1>
+<div class="container mx-auto px-4 py-6">
+  <h1 class="text-5xl font-bold mb-4">Show Tag (should show all posts for this tag)</h1>
 
-<ul>
+  <ul class="list-none bg-white dark:bg-gray-800 p-6 rounded-lg space-y-2">
+    <li class="flex items-center">
+      <strong class="text-gray-700 dark:text-gray-300 w-24">Name:</strong>
+      <span class="text-gray-700 dark:text-gray-300"><%= @tag.name %></span>
+    </li>
+  </ul>
 
-  <li>
-    <strong>Name:</strong>
-    <%= @tag.name %>
-  </li>
-
-</ul>
-
-<span><%= link "Edit", to: Routes.tag_path(@conn, :edit, @tag) %></span> |
-<span><%= link "Back", to: Routes.tag_path(@conn, :index) %></span>
+  <div class="mt-6 space-x-4">
+    <span>
+      <%= link "edit", to: Routes.tag_path(@conn, :edit, @tag), class: "font-mono text-yellow-500 border-double border-4 border-yellow-400 dark:border-yellow-600 hover:border-yellow-200 dark:hover:border-white hover:text-white rounded-lg p-4 hover:bg-yellow-500" %>
+    </span>
+    <span>
+      <%= link "back", to: Routes.tag_path(@conn, :index), class: "font-mono text-gray-500 border-double border-4 border-gray-500 dark:border-gray-400 hover:border-white hover:text-white rounded-lg p-4 hover:bg-gray-500" %>
+    </span>
+  </div>
+</div>

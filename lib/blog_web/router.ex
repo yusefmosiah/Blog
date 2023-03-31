@@ -29,7 +29,8 @@ defmodule BlogWeb.Router do
     resources "/tags", TagController
     resources "/comments", CommentController, except: [:create]
     post "/posts/:id", CommentController, :create
-    resources "/", PostController, only: [:index, :show]
+    resources "/posts", PostController, only: [:index, :show]
+    get "/", PageController, :index
   end
 
   # Other scopes may use custom stacks.
