@@ -55,7 +55,8 @@ defmodule Blog.MixProject do
       {:dialyxir, "~> 1.0", only: :dev, runtime: false},
       {:ex_doc, "~> 0.28", only: :dev, runtime: false},
       {:faker, "~> 0.17"},
-      {:exmoji, "~> 0.3.0"}
+      {:exmoji, "~> 0.3.0"},
+      {:req, "~> 0.3"}
     ]
   end
 
