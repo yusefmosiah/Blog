@@ -1,4 +1,7 @@
 defmodule Blog.OpenAIAPI do
+  @moduledoc """
+  The OpenAI API context.
+  """
   @default_config %{
     model: "gpt-3.5-turbo",
     api_key: System.get_env("OPENAI_API_KEY"),
@@ -16,9 +19,7 @@ defmodule Blog.OpenAIAPI do
       Task.async(fn -> call_api(prompt, history, config) end)
       |> Task.await(500_000)
 
-    comment =
-      Enum.at(history, -1).content
-      |> IO.inspect(label: "history")
+    _comment = Enum.at(history, -1).content
   end
 
   def call_api(prompt, history \\ [], config \\ @default_config) do

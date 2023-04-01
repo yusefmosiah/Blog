@@ -1,4 +1,7 @@
 defmodule BlogWeb.UserAuth do
+  @moduledoc """
+  Handles user authentication.
+  """
   import Plug.Conn
   import Phoenix.Controller
 
