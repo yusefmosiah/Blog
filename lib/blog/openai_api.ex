@@ -12,12 +12,15 @@ defmodule Blog.OpenAIAPI do
   }
 
   def call(prompt, history \\ [], config \\ @default_config) do
-    history = Task.async(fn -> call_api(prompt, history, config) end)
-    |> Task.await(500_000)
-    comment = Enum.at(history, -1).content
+    history =
+      Task.async(fn -> call_api(prompt, history, config) end)
+      |> Task.await(500_000)
 
-    |> IO.inspect(label: "history")
+    comment =
+      Enum.at(history, -1).content
+      |> IO.inspect(label: "history")
   end
+
   def call_api(prompt, history \\ [], config \\ @default_config) do
     messages =
       ([%{role: "user", content: prompt} | history] ++ [config.system_message])
