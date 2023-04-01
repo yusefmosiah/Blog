@@ -7,7 +7,7 @@ defmodule Blog.OpenAIAPI do
     system_message: %{
       role: "system",
       content:
-        "you are a comedy writer. help the user write jokes. keep your responses short and funny. punchlines, not epics"
+        "you are a programming assistant, helping developers write web apps in elixir and phoenix."
     }
   }
 

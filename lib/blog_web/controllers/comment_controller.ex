@@ -17,13 +17,11 @@ defmodule BlogWeb.CommentController do
   def create(conn, %{"comment" => comment_params}) do
     case Comments.create_comment(comment_params) do
       {:ok, _comment} ->
-
         post = Blog.Posts.get_post!(comment_params["post_id"]) |> Blog.Repo.preload([:tags])
-
-        # comments = post.comments |> Enum.map(fn comment -> comment.content end)
 
         comment = Blog.OpenAIAPI.call(post.title <> post.content)
         Comments.create_comment(%{"content" => comment, "post_id" => post.id})
+
         conn
         |> put_flash(:info, "Comment created successfully.")
         |> redirect(to: Routes.post_path(conn, :show, comment_params["post_id"]))
