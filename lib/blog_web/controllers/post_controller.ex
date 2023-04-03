@@ -9,12 +9,13 @@ defmodule BlogWeb.PostController do
   plug(:require_user_owns_post when action in [:edit, :update, :delete])
 
   def index(conn, %{"title" => title}) do
-    posts = Posts.list_posts(title: title)
+    posts = Posts.list_posts(title: title) |> Enum.reverse()
+
     render(conn, "index.html", posts: posts)
   end
 
   def index(conn, _params) do
-    posts = Posts.list_posts()
+    posts = Posts.list_posts() |> Enum.reverse()
     render(conn, "index.html", posts: posts)
   end
 
