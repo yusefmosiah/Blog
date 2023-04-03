@@ -78,7 +78,6 @@ defmodule BlogWeb.CommentControllerTest do
     end
   end
 
-
   describe "create comment ** calls API **" do
     @tag :external
     test "create comment for associated post", %{conn: conn} do
