@@ -3,8 +3,7 @@
   <h1 class="text-5xl font-bold leading-tight mb-6 text-gray-900 dark:text-gray-100 font-mono"><%= @post.title %></h1>
 
   <div class="text-lg bg-white bg-opacity-40 dark:bg-opacity-50 p-6 rounded-lg shadow-md backdrop-blur-md dark:bg-black">
-    <p class="space-y-2">
-      <span class="ml-2 text-gray-900 dark:text-gray-300 leading-relaxed"><%= @post.content %></span>
+    <p class="space-y-2 text-gray-900 dark:text-gray-300 leading-relaxed whitespace-pre-wrap"><%= @post.content %>
     </p>
   </div>
 
@@ -23,13 +22,12 @@
     </div>
   <% end %>
   <div class="flex items-center mt-10">
-    <%= textarea f, :content, placeholder: "write a comment", class: "autoresize w-full p-2 border border-gray-300 rounded dark:bg-gray-700 dark:border-gray-600 dark:text-gray-100" %>
+    <%= textarea f, :content, placeholder: "write a question for GPT", class: "autoresize w-full p-2 border border-gray-300 rounded dark:bg-gray-700 dark:border-gray-600 dark:text-gray-100" %>
     <%= error_tag f, :content %>
-    <%= submit "comment", class: "font-mono py-4 ml-2 rounded-md bg-none text-blue-500 hover:bg-blue-500 hover:text-white p-1.5 rounded border-double hover:border-blue-200 dark:hover:text-white border-4 border-blue-400 dark:hover:border-blue-200" %>
+    <%= submit "askGPT", class: "font-mono py-4 ml-2 rounded-md bg-none text-blue-500 hover:bg-blue-500 hover:text-white p-1.5 rounded border-double hover:border-blue-200 dark:hover:text-white border-4 border-blue-400 dark:hover:border-blue-200" %>
     <%= hidden_input f, :post_id, value: @post.id %>
   </div>
   </.form>
-
 
 
   <div class="mt-6 space-y-4">
