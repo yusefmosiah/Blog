@@ -6,7 +6,7 @@ defmodule BlogWeb.PostController do
   alias Blog.Comments
   alias Blog.Comments.Comment
 
-  plug :require_user_owns_post when action in [:edit, :update, :delete]
+  plug(:require_user_owns_post when action in [:edit, :update, :delete])
 
   def index(conn, %{"title" => title}) do
     posts = Posts.list_posts(title: title)
