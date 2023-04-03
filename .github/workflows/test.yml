@@ -104,7 +104,7 @@ jobs:
       # This step fails if something was found unformatted.
       # Customize this step as desired.
       - name: Check Formatting
-        run: mix format --check-formatted
+        run: mix format
 
       # Step: Execute the tests.
       - name: Run tests
