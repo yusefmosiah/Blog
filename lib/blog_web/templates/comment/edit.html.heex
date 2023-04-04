@@ -1,9 +1,15 @@
 <div class="container mx-auto px-4 py-6">
-  <h1 class="text-5xl font-bold mb-4">Edit Comment</h1>
+  <h1 class="mb-4 text-5xl font-bold">Edit Comment</h1>
 
-  <%= render "form.html", Map.put(assigns, :action, Routes.comment_path(@conn, :update, @comment)) %>
+  <%= render(
+    "form.html",
+    Map.put(assigns, :action, Routes.comment_path(@conn, :update, @comment))
+  ) %>
 
   <span>
-    <%= link "back", to: Routes.comment_path(@conn, :index), class: "font-mono inline-block mt-6 text-gray-500 border-double border-4 border-gray-500 dark:border-gray-400 hover:border-white hover:text-white rounded-lg p-4 hover:bg-gray-500" %>
+    <%= link("back",
+      to: Routes.comment_path(@conn, :index),
+      class: "font-mono mt-6 inline-block rounded-lg border-4 border-double border-gray-500 p-4 text-gray-500 hover:border-white hover:bg-gray-500 hover:text-white dark:border-gray-400"
+    ) %>
   </span>
 </div>

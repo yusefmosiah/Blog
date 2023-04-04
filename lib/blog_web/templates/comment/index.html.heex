@@ -1,27 +1,47 @@
 <div class="container mx-auto px-4 py-6">
-  <h1 class="text-5xl font-bold mb-4">Comments</h1>
+  <h1 class="mb-4 text-5xl font-bold">Comments</h1>
 
-  <div class="bg-white dark:bg-gray-800 p-6 rounded-lg">
-    <table class="table-auto w-full">
+  <div class="rounded-lg bg-white p-6 dark:bg-gray-800">
+    <table class="w-full table-auto">
       <thead>
         <tr>
-          <th class="border dark:border-gray-600 px-4 py-2 text-gray-700 dark:text-gray-300">Content</th>
-          <th class="border dark:border-gray-600 px-4 py-2 text-gray-700 dark:text-gray-300"></th>
+          <th class="border px-4 py-2 text-gray-700 dark:border-gray-600 dark:text-gray-300">
+            Content
+          </th>
+          <th class="border px-4 py-2 text-gray-700 dark:border-gray-600 dark:text-gray-300"></th>
         </tr>
       </thead>
       <tbody>
         <%= for comment <- @comments do %>
           <tr class="hover:bg-gray-100 dark:hover:bg-gray-700">
-            <td class="border dark:border-gray-600 px-4 py-2 text-gray-700 dark:text-gray-300"><%= comment.content %></td>
-            <td class="border dark:border-gray-600 px-4 py-2 text-gray-700 dark:text-gray-300">
-              <span><%= link "show", to: Routes.comment_path(@conn, :show, comment), class: "font-mono text-blue-500 hover:text-blue-700" %></span>
-              <span><%= link "edit", to: Routes.comment_path(@conn, :edit, comment), class: "font-mono text-yellow-500 hover:text-yellow-700" %></span>
-              <span><%= link "delete", to: Routes.comment_path(@conn, :delete, comment), method: :delete, data: [confirm: "Are you sure?"], class: "font-mono text-red-500 hover:text-red-700" %></span>
+            <td class="border px-4 py-2 text-gray-700 dark:border-gray-600 dark:text-gray-300">
+              <%= comment.content %>
+            </td>
+            <td class="border px-4 py-2 text-gray-700 dark:border-gray-600 dark:text-gray-300">
+              <span>
+                <%= link("show",
+                  to: Routes.comment_path(@conn, :show, comment),
+                  class: "font-mono text-blue-500 hover:text-blue-700"
+                ) %>
+              </span>
+              <span>
+                <%= link("edit",
+                  to: Routes.comment_path(@conn, :edit, comment),
+                  class: "font-mono text-yellow-500 hover:text-yellow-700"
+                ) %>
+              </span>
+              <span>
+                <%= link("delete",
+                  to: Routes.comment_path(@conn, :delete, comment),
+                  method: :delete,
+                  data: [confirm: "Are you sure?"],
+                  class: "font-mono text-red-500 hover:text-red-700"
+                ) %>
+              </span>
             </td>
           </tr>
         <% end %>
       </tbody>
     </table>
   </div>
-
 </div>

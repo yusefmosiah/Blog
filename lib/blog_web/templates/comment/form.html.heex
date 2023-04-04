@@ -1,17 +1,21 @@
-<.form let={f} for={@changeset} action={@action} class="bg-white dark:bg-gray-800 p-6 rounded-lg">
+<.form let={f} for={@changeset} action={@action} class="rounded-lg bg-white p-6 dark:bg-gray-800">
   <%= if @changeset.action do %>
-    <div class="alert alert-danger bg-red-200 text-red-900 p-2 rounded-md mb-4">
+    <div class="alert alert-danger mb-4 rounded-md bg-red-200 p-2 text-red-900">
       <p>Oops, something went wrong! Please check the errors below.</p>
     </div>
   <% end %>
 
   <div class="mb-4">
-    <%= label f, :content, class: "block text-gray-700 dark:text-gray-300 font-semibold mb-2" %>
-    <%= textarea f, :content, class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 dark:text-gray-300 dark:bg-gray-700 dark:border-gray-600 leading-tight focus:outline-none focus:shadow-outline" %>
-    <%= error_tag f, :content %>
+    <%= label(f, :content, class: "mb-2 block font-semibold text-gray-700 dark:text-gray-300") %>
+    <%= textarea(f, :content,
+      class: "w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 shadow focus:shadow-outline focus:outline-none dark:border-gray-600 dark:bg-gray-700 dark:text-gray-300"
+    ) %>
+    <%= error_tag(f, :content) %>
   </div>
 
   <div>
-    <%= submit "save", class: "font-mono text-blue-500 hover:bg-blue-500 hover:text-white p-4 rounded-lg border-double border-4 border-blue-400 hover:border-blue-200 dark:text-blue-500 dark:hover:text-white dark:hover:border-white" %>
+    <%= submit("save",
+      class: "font-mono rounded-lg border-4 border-double border-blue-400 p-4 text-blue-500 hover:border-blue-200 hover:bg-blue-500 hover:text-white dark:text-blue-500 dark:hover:border-white dark:hover:text-white"
+    ) %>
   </div>
 </.form>
