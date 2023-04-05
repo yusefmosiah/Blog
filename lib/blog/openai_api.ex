@@ -7,7 +7,7 @@ defmodule Blog.OpenAIAPI do
       model: "gpt-3.5-turbo",
       api_key: System.get_env("OPENAI_API_KEY"),
       url: "https://api.openai.com/v1/chat/completions",
-      max_tokens: 3000,
+      max_tokens: 3700,
       system_message: %{
         role: "system",
         content:

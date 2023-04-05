@@ -33,6 +33,7 @@ defmodule Blog.Posts.Post do
     |> put_assoc(:tags, tags)
     |> validate_required([:title, :content, :published_on])
     |> validate_required([:user_id], message: "only the author can edit this post")
+    |> validate_length(:content, max: 3000)
     |> validate_change(:published_on, fn :published_on, date ->
       case Date.compare(date, Date.utc_today()) do
         :gt -> []
