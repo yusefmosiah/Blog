@@ -1,11 +1,13 @@
 defmodule Blog.PostsTest do
   use Blog.DataCase
 
+  alias Blog.Comments
   alias Blog.Posts
   alias Blog.Posts.Post
 
   import Blog.PostsFixtures
   import Blog.AccountsFixtures
+  import Blog.CommentsFixtures
 
   describe "posts" do
     @invalid_attrs %{content: nil, title: nil}
@@ -119,5 +121,23 @@ defmodule Blog.PostsTest do
       post = post_fixture(user_id: user.id)
       assert %Ecto.Changeset{} = Posts.change_post(post)
     end
+  end
+
+  test "deleting a post deletes its comments" do
+    user = user_fixture()
+    post = post_fixture(user_id: user.id)
+    comment = comment_fixture(post_id: post.id)
+    {:ok, deleted_post} = Posts.delete_post(post)
+
+    # Ensuring the deleted post struct attributes match the original post.
+    assert deleted_post.id == post.id
+    assert deleted_post.title == post.title
+    assert deleted_post.content == post.content
+    # Add more attributes if needed
+
+    # Ensure that the __meta__ field is, indeed, marked as deleted.
+    assert deleted_post.__meta__.state == :deleted
+
+    assert_raise Ecto.NoResultsError, fn -> Comments.get_comment!(comment.id) end
   end
 end
