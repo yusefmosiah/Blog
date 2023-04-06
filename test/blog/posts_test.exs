@@ -129,13 +129,10 @@ defmodule Blog.PostsTest do
     comment = comment_fixture(post_id: post.id)
     {:ok, deleted_post} = Posts.delete_post(post)
 
-    # Ensuring the deleted post struct attributes match the original post.
     assert deleted_post.id == post.id
     assert deleted_post.title == post.title
     assert deleted_post.content == post.content
-    # Add more attributes if needed
 
-    # Ensure that the __meta__ field is, indeed, marked as deleted.
     assert deleted_post.__meta__.state == :deleted
 
     assert_raise Ecto.NoResultsError, fn -> Comments.get_comment!(comment.id) end
