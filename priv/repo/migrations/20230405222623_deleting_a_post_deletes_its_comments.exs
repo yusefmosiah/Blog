@@ -1,4 +1,8 @@
 defmodule Blog.Repo.Migrations.DeletingAPostDeletesItsComments do
+  @moduledoc """
+  This migration is a bit more complicated than the others.
+  We need to alter the comments table to have a foreign key constraint that deletes all comments when a post is deleted.
+  """
   use Ecto.Migration
 
   defmodule Blog.Repo.Migrations.DeletingAPostDeletesItsComments do
