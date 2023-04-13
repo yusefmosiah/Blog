@@ -9,10 +9,10 @@ defmodule BlogWeb.PostView do
     content =
       post.content
       |> String.graphemes()
-      |> Enum.take(200)
+      |> Enum.take(400)
       |> Enum.join()
 
-    if String.length(post.content) > 200 do
+    if String.length(post.content) > 400 do
       content <> "..."
     else
       content
