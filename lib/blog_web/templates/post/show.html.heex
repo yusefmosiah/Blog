@@ -38,7 +38,9 @@
     <div class="mt-6 space-y-4">
       <%= for comment <- @post.comments do %>
         <div class="transform rounded-lg bg-white bg-opacity-40 p-4 shadow-lg backdrop-blur-md transition-all hover:-translate-y-1 dark:border-2 dark:border-double dark:border-gray-700 dark:bg-black dark:bg-opacity-50">
-          <span class="text-gray-900 dark:text-gray-300"><%= comment.content %></span>
+          <span class="whitespace-pre-wrap text-gray-900 dark:text-gray-300">
+            <%= comment.content %>
+          </span>
         </div>
       <% end %>
     </div>
