@@ -20,6 +20,7 @@ defmodule BlogWeb.CommentController do
         post = Blog.Posts.get_post!(comment_params["post_id"]) |> Blog.Repo.preload([:tags])
 
         comment = Blog.OpenAIAPI.call(post.title <> post.content)
+
         Comments.create_comment(%{"content" => comment, "post_id" => post.id})
 
         conn
